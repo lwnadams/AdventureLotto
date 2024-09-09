@@ -24,7 +24,7 @@ function drawSquares(x){
         let newDigitOut = document.createElement("div");
         newDigitOut.classList.add('play-game-random-digit')
         newDigitOut.id = '#'+i
-        newDigitOut.textContent = 'cunt '+i;
+        newDigitOut.textContent = 'test '+i;
         divlottery.appendChild(newDigitOut)
 
         let newDigitin = document.createElement("input");
@@ -37,48 +37,32 @@ function drawSquares(x){
     }
 
 }
-/*
-function beenClicked(id){
-    alert("ID "+id+" has been clicked")
-}*/
 
 let divlottery = document.querySelector('.play-game-lottery-container');
 let divinput = document.querySelector('.play-game-input-form');
-var invalidChars = ["-","+","e",];
 
 document.querySelector("#b0").click()
 
 divinput.addEventListener("keydown", function(key) {
+    let id = key.target.id;
+    const invalidChars = ["-","+","e",];
+    alert(id.innerHTML)
+    if (invalidChars.includes(key.key) || id.innerHTML != undefined){
+        alert("test")
+        key.preventDefault()
+        return
+        } 
     setTimeout(myFunc, 10, key)
   })
 
-
   
 function myFunc(key){
-    if (invalidChars.includes(key.key)) {
-        key.preventDefault();
-    }
     if (isFinite(key.key)){
-    //if (key.key === '1' || key.key === '2' || key.key === '3' || key.key === '4' || key.key === '5' || key.key === '6' || key.key === '7' || key.key === '8' || key.key === '9' || key.key === '0'){
         let id = key.target.id;
         let nextBox = id[0]+String(Number(id[1])+1)
-
-        document.querySelector('#'+nextBox).focus();
+        if (document.querySelector('#'+nextBox)) {
+            document.querySelector('#'+nextBox).focus();
+        }
     }
 }
 
-/*
-divinput.addEventListener("keyup", (key) => {
-    setTimeout(code, delay)
-    if (isFinite(key.key)){
-    //if (key.key === '1' || key.key === '2' || key.key === '3' || key.key === '4' || key.key === '5' || key.key === '6' || key.key === '7' || key.key === '8' || key.key === '9' || key.key === '0'){
-        alert(key.key)
-        let id = key.target.id;
-        
-        let nextBox = id[0]+String(Number(id[1])+1)
-
-        document.querySelector('#'+nextBox).focus();
-    }
-})
-
-*/
