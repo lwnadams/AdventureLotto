@@ -16,6 +16,8 @@ function changebet(x){
 
 function drawSquares(x){
 
+
+
     divlottery.innerHTML = '<div id="#0", class="play-game-random-digit"></div><div id="#1", class="play-game-random-digit"></div>'
     divinput.innerHTML = '<input type="number" id="i0", class="play-game-inputs", name="quantity" min="0" max="9"><input type="number" id="i1", class="play-game-inputs", name="quantity" min="0" max="9">'
     
@@ -38,31 +40,45 @@ function drawSquares(x){
 
 }
 
+function myFunc(key){
+    if (isFinite(key.key)){
+        let id = key.target.id;
+        let nextBox = document.querySelector('#'+id[0]+String(Number(id[1])+1))
+        if (nextBox) {
+            nextBox.focus();
+            nextBox.select();
+        } else {
+            document.querySelector('.play-game-submit-button').focus()
+        }
+    }
+}
+
+
 let divlottery = document.querySelector('.play-game-lottery-container');
 let divinput = document.querySelector('.play-game-input-form');
+
+document.querySelector(".play-game-input-form").addEventListener("click", (input) =>{
+    document.querySelector('#'+input.target.id).select()
+})
+
 
 document.querySelector("#b0").click()
 
 divinput.addEventListener("keydown", function(key) {
     let id = key.target.id;
-    const invalidChars = ["-","+","e",];
-    alert(id.innerHTML)
-    if (invalidChars.includes(key.key) || id.innerHTML != undefined){
-        alert("test")
+    let inputBox = document.querySelector('#'+id)
+    const invalidChars = ["-","+","e"];
+    if (key.key === 'Backspace'){
+        return
+    } else if (invalidChars.includes(key.key)) {
         key.preventDefault()
         return
-        } 
+    } else if (document.getSelection().toString().length > 0) {
+        setTimeout(myFunc, 10, key)
+    } else if (inputBox.value) {
+        key.preventDefault()
+        return
+    } 
     setTimeout(myFunc, 10, key)
   })
-
-  
-function myFunc(key){
-    if (isFinite(key.key)){
-        let id = key.target.id;
-        let nextBox = id[0]+String(Number(id[1])+1)
-        if (document.querySelector('#'+nextBox)) {
-            document.querySelector('#'+nextBox).focus();
-        }
-    }
-}
 
