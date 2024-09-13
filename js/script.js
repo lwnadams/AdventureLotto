@@ -55,10 +55,10 @@ function myFunc(key){
 
 
 let divlottery = document.querySelector('.play-game-lottery-container');
-let divinput = document.querySelector('.play-game-input-form');
+let divinput = document.querySelector('.play-game-input-numbers-container');
 
-document.querySelector(".play-game-input-form").addEventListener("click", (input) =>{
-    document.querySelector('#'+input.target.id).select()
+document.querySelector('.play-game-input-numbers-container').addEventListener("click", (input) =>{
+document.querySelector('#'+input.target.id).select()
 })
 
 
@@ -81,4 +81,12 @@ divinput.addEventListener("keydown", function(key) {
     } 
     setTimeout(myFunc, 10, key)
   })
+
+
+const form = document.querySelector('form'); 
+form.addEventListener('submit', function(event) { 
+  event.preventDefault(); 
+  alert("You've submitted")
+  // Your form submission logic here 
+}); 
 

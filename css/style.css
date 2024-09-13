@@ -373,13 +373,12 @@ footer ul{
 
 .play-game-lottery-container{
     border: solid 3px blue;
-    height: 50%;
+    height: 45%;
     margin: 2%;
-
 }
 
 
-.play-game-input-container{
+.play-game-input-form{
     border: solid 3px blue;
     margin: 2%;
     flex-direction: column;
@@ -388,10 +387,18 @@ footer ul{
 
 .play-game-submit-container{
     border: solid 3px blue;
+    display: flex;
+    justify-content: center;
     margin: 3%;
+    width: 8%;
 }
 
-.play-game-lottery-container, .play-game-input-container, .play-game-input-form {
+.play-game-input-numbers-container{
+    border: solid 3px blue;
+    margin: 2%;
+}
+
+.play-game-lottery-container, .play-game-input-numbers-container, .play-game-input-form {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -401,7 +408,7 @@ footer ul{
     width: 12%;
     aspect-ratio: 2/3;
     border: solid 3px green;
-    margin: 0 3% 0 3%;
+    margin: 3%;
 }
 
 input::-webkit-outer-spin-button,
@@ -414,7 +421,12 @@ input::-webkit-inner-spin-button {
     width: 12%;
     aspect-ratio: 2/3;
     border: solid 3px green;
-    margin: 10% 3% 0 3%;
+    margin: 3%;
+}
+
+.play-game-submit-button{
+    height: 100%;
+    width: 100%;
 }
 
 /*This is the play-JS section*/
