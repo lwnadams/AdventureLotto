@@ -363,23 +363,20 @@ footer ul{
     border: 3px outset black;
     border-width: 0 3px 3px 3px;
     background-color: rgb(195, 209, 209);
-
 }
 
-.play-game-buttons p{
+.play-game-buttons h1{
     transform: skew(20deg);
-
+    font-size: 1.8cqw;
 }
 
 .play-game-lottery-container{
-    border: solid 3px blue;
     height: 30%;
     margin-top: 2%;
 }
 
 
 .play-game-input-form{
-    border: solid 3px blue;
     margin-top: 2%;
     flex-direction: column;
     height: 40%;
@@ -387,17 +384,15 @@ footer ul{
 }
 
 .play-game-submit-container{
-    border: solid 3px blue;
     display: flex;
     justify-content: center;
-    margin: 2%;
+    margin: 5%;
     width: 100%;
     height: 100%;
 
 }
 
 .play-game-input-numbers-container{
-    border: solid 3px blue;
     margin-top: 2%;
     width: 100%;
 }
@@ -408,12 +403,32 @@ footer ul{
     align-items: center;
 }
 
+@keyframes fadein {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+
+
 .play-game-random-digit{
     width: 12%;
     aspect-ratio: 2/3;
     border: solid 3px green;
-    margin: 3%;
+    margin: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.play-game-random-digit h1{
+    font-size: 10cqh;
+    animation: 3s linear fadein;
+}
+
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -425,8 +440,8 @@ input::-webkit-inner-spin-button {
     width: 6%;
     aspect-ratio: 2/3;
     border: solid 3px green;
-    margin: 3%;
-    font-size: 3em;
+    margin: 0 2%;
+    font-size: 4cqh;
     text-align: center;
 }
 
