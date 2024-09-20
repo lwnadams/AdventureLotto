@@ -1,5 +1,21 @@
-function changebet(x){
+function load(){
+//    document.querySelector("#b0").click()
+    forceWin = confirm("Would you like to force win? CONCEPT ONLY. By clicking OK, user forces lottery to win allowing functions that execute upon user victory to be demonstrated.");
+    gameInProgress = false
+    try {
+        let session = window.localStorage;
+        let firstButton = session.getItem("button")
+        console.log(firstButton)
+        changebet(Number(firstButton))
+    } catch {
+        changebet(0)
+    }
+}
 
+
+
+function changebet(x){
+    if(gameInProgress) {location.reload()}
     let buttons = document.querySelectorAll(".play-game-buttons");
     
     for (let i = 0; i < buttons.length; i++){
@@ -12,11 +28,12 @@ function changebet(x){
     document.querySelector("#b"+x).classList.add("JS-button-pressed")
     drawSquares(x)
 
+    let session = window.localStorage;
+    session.setItem("button", x);
+
 }
 
 function drawSquares(x){
-
-
 
     divlottery.innerHTML = '<div id="o0", class="play-game-random-digit"></div><div id="o1", class="play-game-random-digit"></div>'
     divinput.innerHTML = '<input type="number" id="i0", class="play-game-inputs", name="quantity" min="0" max="9"><input type="number" id="i1", class="play-game-inputs", name="quantity" min="0" max="9">'
@@ -53,7 +70,7 @@ function myFunc(key){
 }
 
 function django(count){
-    pcNumbers = []
+    var pcNumbers = []
     for (let i = 0; i < count; i++){
         computerNumber = Math.floor(Math.random() * 10)
         pcNumbers.push(computerNumber)
@@ -62,15 +79,41 @@ function django(count){
 }
 
 function compareNumbers(userNumbers, pcNumbers){
-        for (let i = 0; i < userNumbers.length; i++){
-            let outBox = document.querySelector('#o'+i)
-            outBox.innerHTML = '<h1>'+pcNumbers[i]+'</h1>'
-            outBox.style.color = 'rgb('+Math.floor(Math.random()*255)+', '+Math.floor(Math.random()*255)+', '+Math.floor(Math.random()*255)+')'
-        }
+    if (forceWin) {pcNumbers = userNumbers}
+    for (let i = 0; i < userNumbers.length+1; i++){
+        delay(i, userNumbers, pcNumbers)
+    }
 }
 
+function delay(i, userNumbers, pcNumbers) { 
+    setTimeout(function() { 
+        if (Number(i) === userNumbers.length && userNumbers === pcNumbers){
+            userVictory()
+           }
+        if (i >= userNumbers.length) {
+            return
+        }
+        let outBox = document.querySelector('#o'+i)
+        console.log(pcNumbers[i])
+        outBox.innerHTML = '<h1>'+pcNumbers[i]+'</h1>'
+        outBox.style.color = 'rgb('+Math.floor(Math.random()*255)+', '+Math.floor(Math.random()*255)+', '+Math.floor(Math.random()*255)+')'
+        const winColor = 'gold'
+        const loseColor = 'red'
+        if (userNumbers[i] === pcNumbers[i]){
+        document.querySelector('#i'+i).style.borderColor = winColor
+        document.querySelector('#o'+i).style.borderColor = winColor
+       } else {
+        document.querySelector('#i'+i).style.borderColor = loseColor
+        document.querySelector('#o'+i).style.borderColor = loseColor
+       }
+    }, 1000*i); 
+    } 
 
-function userVictory(){}
+
+function userVictory(){
+    alert("OMG, you WON!!")
+    
+}
 
 
 let divlottery = document.querySelector('.play-game-lottery-container');
@@ -81,7 +124,8 @@ document.querySelector('#'+input.target.id).select()
 })
 
 
-document.querySelector("#b0").click()
+
+
 
 divinput.addEventListener("keydown", function(key) {
     let id = key.target.id;
@@ -104,9 +148,11 @@ divinput.addEventListener("keydown", function(key) {
 
 const form = document.querySelector('form'); 
 form.addEventListener('submit', function(event) { 
-  event.preventDefault(); 
+  event.preventDefault();
+  if (gameInProgress) {return}
   let count = document.querySelectorAll('.play-game-inputs').length
   let userNumbers = []
+  gameInProgress = true
   for (let i = 0; i < count; i ++){
     id = '#'+'i'+i
     let currentBox = document.querySelector(id).value
@@ -114,7 +160,7 @@ form.addEventListener('submit', function(event) {
         alert("Whoops! Please enter a number!")
         return
     } else{
-        userNumbers.push(currentBox)
+        userNumbers.push(Number(currentBox))
     }
   }
   pcNumbers = django(count)
