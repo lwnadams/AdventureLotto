@@ -335,7 +335,7 @@ footer ul{
     max-width: 49%;
 }
 
-#play-game-container{
+.play-game-container{
     height: var(--gameheight);
     overflow: hidden;
     position: absolute;
@@ -450,6 +450,29 @@ input::-webkit-inner-spin-button {
     width: 30%;
 }
 
+.play-game-victory-title{
+    border: solid 3px red;
+    margin: 3%;
+    text-align: center;
+    
+}
+
+.play-game-victory-form{
+    border: solid 3px red;
+    margin: 3%;
+    text-align: center;
+}
+
+.play-game-victory-inputs{
+    margin: 1.5%
+}
+
+.play-game-victory-submit-button{
+    margin: 2%;
+    width: 30%;
+}
+
+
 /*This is the play-JS section*/
 
 .JS-button-pressed{
@@ -536,7 +559,7 @@ iframe{
 /*This is the query section----------------------------------------------------------------------------------------------------------------------------*/
   /*rearranges game for landscape*/
   @media screen and (orientation:landscape){
-    #play-game-container{
+    .play-game-container{
         width: 50%;
         height: auto;
     }
